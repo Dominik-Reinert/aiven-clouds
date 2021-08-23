@@ -26,8 +26,6 @@ export interface StyleContext {
   padding: {};
 }
 
-//https://www.schemecolor.com/blue-white-grey-and-black.php
-
 export const defaultStyles: StyleContext = {
   shades: {
     text: "#303030",
@@ -39,7 +37,7 @@ export const defaultStyles: StyleContext = {
   colors: {
     background: "#F0F0F0",
     cardBackground: "#FAFAFA",
-    highlight: "#ff3554",
+    highlight: "#ff3554", // aiven branding
   },
   sizes: {
     font: {

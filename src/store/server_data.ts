@@ -2,6 +2,11 @@ interface ServerDataConfig<ServerResponse extends {}> {
   fetch: () => Promise<ServerResponse>;
 }
 
+/**
+ * This server data can be implemented if you want to fetch data while suspending react components.
+ *
+ * The public `get` method will throw a suspending promise if the data is still pending upon accessing it.
+ */
 export class ServerData<ServerResponse extends {}> {
   private response: ServerResponse | undefined;
   private fetchPromise: Promise<ServerResponse> | undefined;

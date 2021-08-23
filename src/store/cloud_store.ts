@@ -1,4 +1,3 @@
-import { GetCloudsResponse } from "../generated/get_clouds_response";
 import { AbstractStore } from "./abstract_store";
 import { ServerData } from "./server_data";
 
@@ -43,12 +42,13 @@ class CloudStore extends AbstractStore<
   }
 }
 
+// expose a single instance of the cloud store
 export const cloudStore: CloudStore = new CloudStore(
   new ServerData<GetCloudsResponse.RootCloud>({
     fetch: () =>
-      fetch(
-        "https://api.aiven.io/v1/clouds"
-      ) as unknown as Promise<GetCloudsResponse.RootCloud>,
+      fetch("https://api.aiven.io/v1/clouds").then((result) =>
+        result.json()
+      ) as Promise<GetCloudsResponse.RootCloud>,
   })
 );
 
@@ -62,7 +62,7 @@ export const cloudStore: CloudStore = new CloudStore(
  * Therefore, I usually go for adopting the data right where it is received in order to avoid having to change the app
  * just because the backend datastructure changed.
  */
-module GetCloudsResponse {
+declare namespace GetCloudsResponse {
   export interface Cloud {
     cloud_description: string;
     cloud_name: string;
