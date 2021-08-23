@@ -19,6 +19,7 @@ export interface StyleContext {
       headline: string;
       subHeadline: string;
       text: string;
+      smallText: string;
     };
     width: {
       content: string;
@@ -46,6 +47,7 @@ export const defaultStyles: StyleContext = {
       headline: "40px",
       subHeadline: "28px",
       text: "20px",
+      smallText: "16px"
     },
     width: {
       content: "70%",

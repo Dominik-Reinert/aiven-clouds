@@ -1,8 +1,7 @@
 import * as React from "react";
-import { cloudStore } from "../store/cloud_store";
-import { jsx } from "@emotion/react";
 
 /**@jsx jsx */
+import {jsx} from '@emotion/react'
 
 export function HomePage(): JSX.Element {
   return (
@@ -13,8 +12,10 @@ export function HomePage(): JSX.Element {
 }
 
 function HomePageSuspending(): JSX.Element {
-  console.log(
-    `Data arrived! ${JSON.stringify(cloudStore.getCurrentDataAdapted())}`
+  return (
+    <div>
+      Welcome to the home page of my assessment! Use the navbar navigation
+      buttons to either list the amazon clouds, or the google clouds!
+    </div>
   );
-  return <div>Hello suspense</div>;
 }
