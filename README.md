@@ -1,3 +1,9 @@
+# Info
+
+## .env file
+
+the .env file sets the `DISABLE_NEW_JSX_TRANSFORM=true` as a workaround of a [bug in react which interferes with emotionjs](https://github.com/emotion-js/emotion/issues/2041)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
