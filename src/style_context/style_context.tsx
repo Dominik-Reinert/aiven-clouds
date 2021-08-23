@@ -9,9 +9,10 @@ export interface StyleContext {
     boxShadow: string;
   };
   colors: {
-    background: string;
     cardBackground: string;
     highlight: string;
+    aivenDark: string;
+    aivenBright: string;
   };
   sizes: {
     font: {
@@ -28,16 +29,17 @@ export interface StyleContext {
 
 export const defaultStyles: StyleContext = {
   shades: {
-    text: "#303030",
-    selectedText: "#1C1C1C",
+    text: "#FAFAFA",
+    selectedText: "#FFFFFF",
     border: "#808080",
     separation: "#808080",
     boxShadow: "#C0C0C0",
   },
   colors: {
-    background: "#F0F0F0",
     cardBackground: "#FAFAFA",
     highlight: "#ff3554", // aiven branding
+    aivenDark: "#ff3554",
+    aivenBright: "#ff7503"
   },
   sizes: {
     font: {

@@ -32,11 +32,11 @@ export function Navbar(): JSX.Element {
 
         .first-name {
           margin-right: 8px;
-          color: ${styleContext.shades.selectedText};
+          color: ${styleContext.shades.text};
         }
 
         .last-name {
-          color: ${styleContext.colors.highlight};
+          color: ${styleContext.shades.text};
         }
 
         .link {
@@ -53,7 +53,8 @@ export function Navbar(): JSX.Element {
         .active {
           a {
             padding-bottom: 7px;
-            border-bottom: 1px solid ${styleContext.colors.highlight};
+            color: ${styleContext.shades.text};
+            border-bottom: 1px solid ${styleContext.shades.text};
           }
         }
       `}
