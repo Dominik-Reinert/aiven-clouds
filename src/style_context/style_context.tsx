@@ -39,7 +39,7 @@ export const defaultStyles: StyleContext = {
   colors: {
     background: "#F0F0F0",
     cardBackground: "#FAFAFA",
-    highlight: "#3466AA",
+    highlight: "#ff3554",
   },
   sizes: {
     font: {
