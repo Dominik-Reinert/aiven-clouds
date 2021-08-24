@@ -1,8 +1,64 @@
 # Info
 
+## Tools and Frameworks
+
+The application was created using the [create react app](https://reactjs.org/docs/create-a-new-react-app.html) npm tool. It uses the following tools and frameworks:
+
+- [Yarn](https://yarnpkg.com/) as build tool
+- [React](https://reactjs.org/) as frontend javascript framework
+- [React router](https://reactrouter.com/) for routing
+- [React I18next](https://react.i18next.com/latest/typescript) for translations
+- [Typescript](https://www.typescriptlang.org/) as programming language
+- [Emotion](https://github.com/emotion-js) for styling and CSS
+- [Fontawesome](https://fontawesome.com/) for icons
+- [Jest](https://jestjs.io/) for testing
+
+
+## Getting things started
+
+Follow these steps to start the application:
+
+- Download and install [Yarn](https://yarnpkg.com/)
+- Navigate to the project root directory
+- Run `yarn install`
+- Select the script you want to run below
+
+### Available Scripts
+
+In the project directory, you can run:
+
+#### `yarn start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
+
+#### `yarn test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+#### `yarn build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+
 ## .env file
 
 the .env file sets the `DISABLE_NEW_JSX_TRANSFORM=true` as a workaround of a [bug in react which interferes with emotionjs](https://github.com/emotion-js/emotion/issues/2041)
+
+
+
+
+
 
 # Getting Started with Create React App
 
