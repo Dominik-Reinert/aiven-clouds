@@ -5,11 +5,10 @@ import { Background } from "./background/background";
 import { ClearStyles } from "./clear_styles/clear_styles";
 import "./i18n";
 import { Navbar } from "./navbar/navbar";
+import { AmazonPage } from "./pages/amazon_page";
 import { HomePage } from "./pages/home_page";
 import { Routes } from "./routes/routes";
 import { defaultStyles, styleContext } from "./style_context/style_context";
-/**@jsx jsx */
-import {  jsx } from "@emotion/react";
 
 function App() {
   return (
@@ -19,6 +18,9 @@ function App() {
           <BrowserRouter>
             <Navbar />
             <Switch>
+              <Route path={Routes.amazon}>
+                <AmazonPage />
+              </Route>
               <Route path={Routes.home}>
                 <HomePage />
               </Route>
