@@ -11,13 +11,22 @@ export function SelectionContextProvider(
   const [selection, setSelection] =
     React.useState<SelectionContext>(defaultSelection);
   const [onSetLon, onSetLat] = usePosition(selection, setSelection);
-  const [onSetAvailableProvider] = useAvailableProvider(selection, setSelection);
+  const [onSetAvailableProvider] = useAvailableProvider(
+    selection,
+    setSelection
+  );
+  const [onSetAvailableLocation] = useAvailableLocations(
+    selection,
+    setSelection
+  );
   return (
     <selectionContext.Provider
       value={{
         ...selection,
         setLon: onSetLon,
-        setLat: onSetLat
+        setLat: onSetLat,
+        setAvailableProvider: onSetAvailableProvider,
+        setAvailableLocation: onSetAvailableLocation,
       }}
     >
       {props.children}
@@ -51,4 +60,16 @@ function useAvailableProvider(
     [selection, setSelection]
   );
   return [onSetAvailableProvider];
+}
+
+function useAvailableLocations(
+  selection: SelectionContext,
+  setSelection: React.Dispatch<React.SetStateAction<SelectionContext>>
+): [onSetAvailableLocation: (availableLocation: string[]) => void] {
+  const onSetAvailableLocations = React.useCallback(
+    (availableLocations: string[]) =>
+      setSelection({ ...selection, availableLocations }),
+    [selection, setSelection]
+  );
+  return [onSetAvailableLocations];
 }
