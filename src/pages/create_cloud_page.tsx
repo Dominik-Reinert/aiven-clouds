@@ -2,8 +2,7 @@ import * as React from "react";
 import { Cloud, cloudStore } from "../store/cloud_store";
 
 interface CreateCloudPageConfig {
-  fallback: string;
-  cloudNamePrefix: string;
+  name: string;
   cloudDescriptionFormatter?: (description: string) => string;
 }
 
@@ -20,44 +19,20 @@ const defaultCloudDescriptionFormatter = (description: string) => {
 export function createCloudPage<P>(
   Component: (props: P & ExtendedProps) => JSX.Element,
   config: CreateCloudPageConfig
-): (props: P) => JSX.Element {
-  const {
-    fallback,
-    cloudNamePrefix,
-    cloudDescriptionFormatter = defaultCloudDescriptionFormatter,
-  } = config;
-  return (props) => {
-    return (
-      <React.Suspense fallback={fallback}>
-        <SuspendingCloudPage
-          Component={Component}
-          componentProps={props}
-          cloudNamePrefix={cloudNamePrefix}
-          cloudDescriptionFormatter={cloudDescriptionFormatter}
-        />
-      </React.Suspense>
-    );
-  };
-}
-
-function SuspendingCloudPage<P>(props: {
-  Component: (p: P) => JSX.Element;
-  componentProps: P;
-  cloudNamePrefix: string;
-  cloudDescriptionFormatter: (description: string) => string;
-}): JSX.Element {
-  const {
-    Component,
-    componentProps,
-    cloudNamePrefix,
-    cloudDescriptionFormatter,
-  } = props;
-  const clouds: Cloud[] = cloudStore
-    .getCurrentDataAdapted()
-    .clouds.filter((cloud) => cloud.cloudName?.startsWith(cloudNamePrefix));
-  clouds.forEach((cloud) => {
-    cloud.cloudDescription = cloudDescriptionFormatter(cloud.cloudDescription);
+): (props: P) => JSX.Element | null {
+  const { name, cloudDescriptionFormatter = defaultCloudDescriptionFormatter } =
+    config;
+  const result = React.forwardRef((props: P, ref: any) => {
+    const clouds: Cloud[] = cloudStore.getCurrentDataAdapted().clouds;
+    clouds.forEach((cloud) => {
+      cloud.cloudDescription = cloudDescriptionFormatter(
+        cloud.cloudDescription
+      );
+    });
+    return <Component {...props} clouds={clouds} />;
   });
 
-  return <Component {...componentProps} clouds={clouds} />;
+  //needed for identification of the component
+  Object.defineProperty(result, "name", { value: name });
+  return result;
 }

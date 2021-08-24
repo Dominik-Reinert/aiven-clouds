@@ -1,8 +1,8 @@
 /**@jsx jsx */
 import { jsx } from "@emotion/react";
 import { Link, useLocation } from "react-router-dom";
-import { PositionInput } from "../position_context/position_input";
 import { Routes } from "../routes/routes";
+import { PositionInput } from "../selection_context/position_input";
 import { useStyleContext } from "../style_context/use_style_context";
 import { navbarStyle } from "./navbar_style";
 
@@ -27,10 +27,6 @@ export function Navbar(): JSX.Element {
       </div>
       <div className="position-input-wrapper">
         <PositionInput />
-      </div>
-      <div className="link-wrapper">
-        <RouteLink route={Routes.amazon} label="Amazon" />
-        <RouteLink route={Routes.google} label="Google" />
       </div>
     </div>
   );

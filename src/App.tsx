@@ -5,38 +5,20 @@ import { Background } from "./background/background";
 import { ClearStyles } from "./clear_styles/clear_styles";
 import "./i18n";
 import { Navbar } from "./navbar/navbar";
-import { AmazonPage } from "./pages/amazon_page";
 import { HomePage } from "./pages/home_page";
-import {
-  defaultPosition,
-  positionContext,
-} from "./position_context/position_context";
 import { Routes } from "./routes/routes";
+import { SelectionContextProvider } from "./selection_context/selection_context_provider";
 import { defaultStyles, styleContext } from "./style_context/style_context";
 
 function App() {
-  const [position, setPosition] = React.useState(defaultPosition);
-  const onSetLon = React.useCallback(
-    (lon: number) => setPosition({ lat: position.lat, lon }),
-    [position]
-  );
-  const onSetLat = React.useCallback(
-    (lat: number) => setPosition({ lat: lat, lon: position.lon }),
-    [position]
-  );
   return (
     <styleContext.Provider value={defaultStyles}>
-      <positionContext.Provider
-        value={{ ...position, setLon: onSetLon, setLat: onSetLat }}
-      >
+      <SelectionContextProvider>
         <ClearStyles>
           <Background>
             <BrowserRouter>
               <Navbar />
               <Switch>
-                <Route path={Routes.amazon}>
-                  <AmazonPage />
-                </Route>
                 <Route path={Routes.home}>
                   <HomePage />
                 </Route>
@@ -47,7 +29,7 @@ function App() {
             </BrowserRouter>
           </Background>
         </ClearStyles>
-      </positionContext.Provider>
+      </SelectionContextProvider>
     </styleContext.Provider>
   );
 }

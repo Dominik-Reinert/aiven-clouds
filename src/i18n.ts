@@ -24,13 +24,13 @@ const resources: LanguageResources = {
   de: {
     translation: {
       welcome: "Willkommen bei aiven clouds!",
-      homeInstruction: "Wählen Sie oben entweder Amazon oder Google clouds.",
+      homeInstruction: "Bitte warten Sie, währrend die Daten geladen werden.",
     },
   },
   en: {
     translation: {
       welcome: "Welcome to aiven clouds!",
-      homeInstruction: "Select Amazon or Google clouds on top to get started.",
+      homeInstruction: "Please wait while the data is being fetched.",
     },
   },
 };

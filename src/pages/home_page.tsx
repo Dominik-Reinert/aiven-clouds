@@ -1,45 +1,45 @@
 /**@jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { jsx } from "@emotion/react";
 import React from "react";
+import { CloudComponent } from "../cloud/cloud";
 import { useLanguageTranslation } from "../i18n";
 import { useStyleContext } from "../style_context/use_style_context";
+import { createCloudPage } from "./create_cloud_page";
+import { homePageStyle } from "./home_page_style";
 
 export function HomePage(): JSX.Element {
   return (
-    <React.Suspense fallback="Fetching clouds...">
+    <React.Suspense fallback={<HomePageFallback />}>
       <HomePageSuspending />
     </React.Suspense>
   );
 }
 
-function HomePageSuspending(): JSX.Element {
+function HomePageFallback(): JSX.Element {
   const [t] = useLanguageTranslation();
   const styleContext = useStyleContext();
   return (
-    <div
-      css={css`
-        label: home-page;
-
-        display: flex;
-
-        margin: 80px auto;
-        flex-direction: column;
-        width: 70%;
-        text-align: center;
-
-        .welcome {
-          font-size: ${styleContext.sizes.font.welcome};
-          color: ${styleContext.shades.text};
-        }
-
-        .instruction {
-          font-size: ${styleContext.sizes.font.headline};
-          color: ${styleContext.shades.text};
-        }
-      `}
-    >
+    <div css={homePageStyle(styleContext)}>
       <span className="welcome">{t("welcome")}</span>
       <span className="instruction">{t("homeInstruction")}</span>
     </div>
   );
 }
+
+const HomePageSuspending = createCloudPage<{}>(
+  (props) => {
+    return (
+      <div>
+        {props.clouds?.map((cloud) => {
+          return (
+            <CloudComponent
+              key={cloud.cloudName + cloud.cloudDescription}
+              {...cloud}
+            />
+          );
+        })}
+      </div>
+    );
+  },
+  { name: "HomePageSuspending" }
+);

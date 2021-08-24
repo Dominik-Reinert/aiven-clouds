@@ -1,8 +1,8 @@
 import * as React from "react";
-import { usePositionContext } from "./use_position_context";
+import { useSelectionContext } from "./use_selection_context";
 
 export function PositionInput(): JSX.Element {
-  const { lon, lat, setLon, setLat } = usePositionContext();
+  const { lon, lat, setLon, setLat } = useSelectionContext();
   return (
     <div>
       <input
