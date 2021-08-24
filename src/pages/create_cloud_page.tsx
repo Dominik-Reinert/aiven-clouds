@@ -1,4 +1,5 @@
 import * as React from "react";
+import { getDistanceFromLatLonInKm } from "../geographical_utils/calculate_distance";
 import { useSelectionContext } from "../selection_context/use_selection_context";
 import { Cloud, cloudStore } from "../store/cloud_store";
 
@@ -34,13 +35,17 @@ export function createCloudPage<P>(
     const clouds: Cloud[] = cloudStore.getCurrentDataAdapted().clouds;
     useAvailableProviderUpdate(clouds);
     useAvailableLocationsUpdate(clouds);
-    clouds.forEach((cloud) => {
-      cloud.cloudDescription = cloudDescriptionFormatter(
-        cloud.cloudDescription
-      );
-    });
+    const { lon, lat } = useSelectionContext();
+    clouds
+      .sort((cloudA: Cloud, cloudB: Cloud) =>
+        sortCloudsByDistanceToCurrentLocation({ lon, lat }, cloudA, cloudB)
+      )
+      .forEach((cloud) => {
+        cloud.cloudDescription = cloudDescriptionFormatter(
+          cloud.cloudDescription
+        );
+      });
     // filter by selection
-    // order by distance
     return <Component {...props} clouds={clouds} />;
   });
 
@@ -72,4 +77,25 @@ function useAvailableLocationsUpdate(clouds: Cloud[]): void {
   ) {
     setAvailableLocation?.(newLocations);
   }
+}
+
+function sortCloudsByDistanceToCurrentLocation(
+  location: { lon: number; lat: number },
+  cloudA: Cloud,
+  cloudB: Cloud
+): number {
+  const { lon, lat } = location;
+  const distA = getDistanceFromLatLonInKm(
+    lon,
+    lat,
+    cloudA.geoLongitude,
+    cloudB.geoLatitude
+  );
+  const distB = getDistanceFromLatLonInKm(
+    lon,
+    lat,
+    cloudB.geoLongitude,
+    cloudB.geoLatitude
+  );
+  return distA - distB;
 }
