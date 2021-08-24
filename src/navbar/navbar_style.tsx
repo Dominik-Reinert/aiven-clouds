@@ -6,33 +6,39 @@ export const navbarStyle = (styleContext: StyleContext) => css`
 
   display: flex;
   width: ${styleContext.sizes.width.content};
+  height: 100px; 
+
   margin: auto;
-  height: 100px;
+  padding: 12px 0;
 
   .page-name-wrapper {
-    margin: auto;
-    flex: 12 6 200px;
     display: flex;
+    flex: 12 6 200px;
+
+    height: 100%;
+    align-items: center;
+  }
+
+  .aiven-logo {
+    width: 140px;
+    height: auto;
   }
 
   .link-wrapper {
     display: flex;
     flex: 1 2 300px;
     font-size: ${styleContext.sizes.font.text};
-    margin: 12px 0 4px;
+    
+    height: 100%;
+    align-items: center;
+    
+    margin-top: 8px;
   }
 
   .page-name {
-    font-size: ${styleContext.sizes.font.headline};
-    margin-right: 16px;
+    font-size: ${styleContext.sizes.font.subHeadline};
+    margin: 16px 16px 14px;
     color: ${styleContext.shades.text};
-  }
-
-  .dev-name {
-    font-size: ${styleContext.sizes.font.smallText};
-    color: ${styleContext.shades.text};
-    align-self: flex-end;
-    margin-bottom: 6px;
   }
 
   .link {

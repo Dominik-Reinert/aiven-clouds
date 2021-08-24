@@ -16,6 +16,7 @@ export interface StyleContext {
   };
   sizes: {
     font: {
+      welcome: string;
       headline: string;
       subHeadline: string;
       text: string;
@@ -40,14 +41,15 @@ export const defaultStyles: StyleContext = {
     cardBackground: "#FAFAFA",
     highlight: "#ff3554", // aiven branding
     aivenDark: "#ff3554",
-    aivenBright: "#ff7503"
+    aivenBright: "#ff7503",
   },
   sizes: {
     font: {
+      welcome: "60px",
       headline: "40px",
       subHeadline: "28px",
       text: "20px",
-      smallText: "16px"
+      smallText: "16px",
     },
     width: {
       content: "70%",

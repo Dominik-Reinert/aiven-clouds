@@ -21,12 +21,12 @@ export function Navbar(): JSX.Element {
   return (
     <div css={navbarStyle(styleContext)}>
       <div className="page-name-wrapper">
-        <span className="page-name">Aiven Clouds</span>
-        <span className="dev-name">by Dominik Reinert</span>
+        <img className="aiven-logo" src="./aiven-home.svg" alt="aiven" />
+        <span className="page-name">clouds</span>
       </div>
       <div className="link-wrapper">
-        <RouteLink route={Routes.amazon} label="Amazon clouds" />
-        <RouteLink route={Routes.google} label="Google clouds" />
+        <RouteLink route={Routes.amazon} label="Amazon" />
+        <RouteLink route={Routes.google} label="Google" />
       </div>
     </div>
   );
