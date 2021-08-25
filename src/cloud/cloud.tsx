@@ -23,25 +23,29 @@ export function CloudComponent(props: CloudProps): JSX.Element {
         width: 70%;
 
         background-color: ${styleContext.colors.cardBackground};
+        border-bottom: 1px solid ${styleContext.colors.aivenBright};
 
-        margin: auto auto 20px auto;
+        margin: auto auto 0;
         padding: 16px;
-
-        box-shadow: 1px 3px 3px 1px ${styleContext.shades.boxShadow};
-        border-radius: 20px;
 
         display: flex;
         align-items: center;
 
         .description {
-          font-size: ${styleContext.sizes.font.subHeadline};
+          font-size: ${styleContext.sizes.font.text};
           color: ${styleContext.colors.aivenDark};
         }
 
         .name {
           margin-left: 4px;
-          font-size: ${styleContext.sizes.font.text};
           color: ${styleContext.colors.aivenDark};
+        }
+
+        .name,
+        .region,
+        .distance,
+        .coordinates {
+          font-size: ${styleContext.sizes.font.smallText};
         }
 
         > * {

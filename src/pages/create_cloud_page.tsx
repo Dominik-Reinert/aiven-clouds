@@ -25,11 +25,16 @@ export function createCloudPage<P>(
   const { name, cloudDescriptionFormatter = defaultCloudDescriptionFormatter } =
     config;
   const result = React.forwardRef((props: P, ref) => {
-    const clouds: Cloud[] = cloudStore.getCurrentDataAdapted().clouds;
+    let clouds: Cloud[] = cloudStore.getCurrentDataAdapted().clouds;
     useAvailableProviderUpdate(clouds);
     useAvailableLocationsUpdate(clouds);
-    const { lon, lat } = useSelectionContext();
-    clouds
+    const { lon, lat, selectedLocations, selectedProvider } =
+      useSelectionContext();
+    clouds = clouds
+      .filter((cloud) => selectedLocations.includes(cloud.geoRegion))
+      .filter((cloud) =>
+        selectedProvider.includes(getProviderFromCloudName(cloud.cloudName))
+      )
       .map((cloud) => ({
         ...cloud,
         cloudDescription: cloudDescriptionFormatter(cloud.cloudDescription),
@@ -54,11 +59,15 @@ export function createCloudPage<P>(
   return result;
 }
 
+function getProviderFromCloudName(cloudName: string): string {
+  return cloudName.split("-")[0];
+}
+
 function useAvailableProviderUpdate(clouds: Cloud[]): void {
   const { availableProvider, setAvailableProvider, setSelectedProvider } =
     useSelectionContext();
   const newProvider = Array.from(
-    new Set(clouds.map((cloud) => cloud.cloudName.split("-")[0]))
+    new Set(clouds.map((cloud) => getProviderFromCloudName(cloud.cloudName)))
   );
   if (
     newProvider.filter((value) => availableProvider.includes(value)).length !==

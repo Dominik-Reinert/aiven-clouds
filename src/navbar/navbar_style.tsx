@@ -6,7 +6,7 @@ export const navbarStyle = (styleContext: StyleContext) => css`
 
   display: flex;
   width: ${styleContext.sizes.width.content};
-  height: 100px; 
+  height: 100px;
 
   margin: auto;
   padding: 12px 0;
@@ -28,10 +28,10 @@ export const navbarStyle = (styleContext: StyleContext) => css`
     display: flex;
     flex: 1 2 300px;
     font-size: ${styleContext.sizes.font.text};
-    
+
     height: 100%;
     align-items: center;
-    
+
     margin-top: 8px;
   }
 
@@ -41,31 +41,12 @@ export const navbarStyle = (styleContext: StyleContext) => css`
     color: ${styleContext.shades.text};
   }
 
-  .link {
-    height: 100%;
-    flex: 1 0 0;
-    display: inline-flex;
-    align-items: center;
-
-    a {
-      padding-bottom: 8px;
-      color: ${styleContext.shades.text};
-    }
-  }
-
-  .active {
-    a {
-      padding-bottom: 7px;
-      color: ${styleContext.shades.text};
-      border-bottom: 1px solid ${styleContext.shades.text};
-    }
-  }
-
   .position-input-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 100%;
+    margin-top: 9px;
 
     > * {
       flex: 1 0 0;
