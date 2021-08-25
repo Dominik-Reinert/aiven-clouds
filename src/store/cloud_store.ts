@@ -7,6 +7,7 @@ export interface Cloud {
   geoLatitude: number;
   geoLongitude: number;
   geoRegion: string;
+  distanceInKm?: number;
 }
 
 export interface RootCloud {

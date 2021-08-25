@@ -18,13 +18,6 @@ const defaultCloudDescriptionFormatter = (description: string) => {
   return splits[splits.length - 1];
 };
 
-enum ProviderToPrefix {
-  AMAZON = "aws",
-  AZURE = "azure",
-  GOOGLE = "google",
-  DO = "do",
-}
-
 export function createCloudPage<P>(
   Component: (props: P & ExtendedProps) => JSX.Element,
   config: CreateCloudPageConfig
@@ -37,14 +30,21 @@ export function createCloudPage<P>(
     useAvailableLocationsUpdate(clouds);
     const { lon, lat } = useSelectionContext();
     clouds
+      .map((cloud) => ({
+        ...cloud,
+        cloudDescription: cloudDescriptionFormatter(cloud.cloudDescription),
+        distanceInKm: getDistanceFromLatLonInKm(
+          lon,
+          lat,
+          cloud.geoLongitude,
+          cloud.geoLatitude
+        ),
+      }))
       .sort((cloudA: Cloud, cloudB: Cloud) =>
-        sortCloudsByDistanceToCurrentLocation({ lon, lat }, cloudA, cloudB)
-      )
-      .forEach((cloud) => {
-        cloud.cloudDescription = cloudDescriptionFormatter(
-          cloud.cloudDescription
-        );
-      });
+        cloudA.distanceInKm !== undefined && cloudB.distanceInKm !== undefined
+          ? cloudA.distanceInKm - cloudB.distanceInKm
+          : 0
+      );
     // filter by selection
     return <Component {...props} clouds={clouds} />;
   });
@@ -77,25 +77,4 @@ function useAvailableLocationsUpdate(clouds: Cloud[]): void {
   ) {
     setAvailableLocation?.(newLocations);
   }
-}
-
-function sortCloudsByDistanceToCurrentLocation(
-  location: { lon: number; lat: number },
-  cloudA: Cloud,
-  cloudB: Cloud
-): number {
-  const { lon, lat } = location;
-  const distA = getDistanceFromLatLonInKm(
-    lon,
-    lat,
-    cloudA.geoLongitude,
-    cloudB.geoLatitude
-  );
-  const distB = getDistanceFromLatLonInKm(
-    lon,
-    lat,
-    cloudB.geoLongitude,
-    cloudB.geoLatitude
-  );
-  return distA - distB;
 }

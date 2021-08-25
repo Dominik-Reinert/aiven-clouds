@@ -24,7 +24,7 @@ const resources: LanguageResources = {
   de: {
     translation: {
       welcome: "Willkommen bei aiven clouds!",
-      homeInstruction: "Bitte warten Sie, währrend die Daten geladen werden.",
+      homeInstruction: "Bitte warten Sie, während die Daten geladen werden.",
     },
   },
   en: {
