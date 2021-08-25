@@ -18,9 +18,6 @@ class CloudStore extends AbstractStore<
   ServerData<GetCloudsResponse.RootCloud>,
   RootCloud
 > {
-  constructor(initialData: ServerData<GetCloudsResponse.RootCloud>) {
-    super(initialData);
-  }
 
   protected adaptData(
     data: ServerData<GetCloudsResponse.RootCloud>

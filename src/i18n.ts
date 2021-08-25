@@ -10,6 +10,8 @@ enum SupportedLanguages {
 interface LanguageResource {
   welcome: string;
   homeInstruction: string;
+  regionDropdownLabel: string;
+  providerDropdownLabel: string;
 }
 
 interface DefaultNamespaceWrapper {
@@ -25,12 +27,16 @@ const resources: LanguageResources = {
     translation: {
       welcome: "Willkommen bei aiven clouds!",
       homeInstruction: "Bitte warten Sie, während die Daten geladen werden.",
+      regionDropdownLabel: "Region",
+      providerDropdownLabel: "Anbieter"
     },
   },
   en: {
     translation: {
       welcome: "Welcome to aiven clouds!",
       homeInstruction: "Please wait while the data is being fetched.",
+      regionDropdownLabel: "Region",
+      providerDropdownLabel: "Provider"
     },
   },
 };

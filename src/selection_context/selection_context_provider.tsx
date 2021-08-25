@@ -11,14 +11,10 @@ export function SelectionContextProvider(
   const [selection, setSelection] =
     React.useState<SelectionContext>(defaultSelection);
   const [onSetLon, onSetLat] = usePosition(selection, setSelection);
-  const [onSetAvailableProvider] = useAvailableProvider(
-    selection,
-    setSelection
-  );
-  const [onSetAvailableLocation] = useAvailableLocations(
-    selection,
-    setSelection
-  );
+  const [onSetAvailableProvider] = useAvailableProvider(setSelection);
+  const [onSetAvailableLocation] = useAvailableLocations(setSelection);
+  const [onSetSelectedLocation] = useSelectedLocations(setSelection);
+  const [onSetSelectedProvider] = useSelectedProvider(setSelection);
   return (
     <selectionContext.Provider
       value={{
@@ -27,6 +23,8 @@ export function SelectionContextProvider(
         setLat: onSetLat,
         setAvailableProvider: onSetAvailableProvider,
         setAvailableLocation: onSetAvailableLocation,
+        setSelectedLocation: onSetSelectedLocation,
+        setSelectedProvider: onSetSelectedProvider,
       }}
     >
       {props.children}
@@ -51,25 +49,45 @@ function usePosition(
 }
 
 function useAvailableProvider(
-  selection: SelectionContext,
   setSelection: React.Dispatch<React.SetStateAction<SelectionContext>>
 ): [onSetAvailableProvider: (availableProvider: string[]) => void] {
   const onSetAvailableProvider = React.useCallback(
     (availableProvider: string[]) =>
-      setSelection({ ...selection, availableProvider }),
-    [selection, setSelection]
+      setSelection((state) => ({ ...state, availableProvider })),
+    [setSelection]
   );
   return [onSetAvailableProvider];
 }
 
 function useAvailableLocations(
-  selection: SelectionContext,
   setSelection: React.Dispatch<React.SetStateAction<SelectionContext>>
 ): [onSetAvailableLocation: (availableLocation: string[]) => void] {
   const onSetAvailableLocations = React.useCallback(
     (availableLocations: string[]) =>
-      setSelection({ ...selection, availableLocations }),
-    [selection, setSelection]
+      setSelection((state) => ({ ...state, availableLocations })),
+    [setSelection]
   );
   return [onSetAvailableLocations];
+}
+
+function useSelectedLocations(
+  setSelection: React.Dispatch<React.SetStateAction<SelectionContext>>
+): [onSetSelectedLocation: (selectedLocation: string[]) => void] {
+  const onSetSelectedLocations = React.useCallback(
+    (selectedLocations: string[]) =>
+      setSelection((state) => ({ ...state, selectedLocations })),
+    [setSelection]
+  );
+  return [onSetSelectedLocations];
+}
+
+function useSelectedProvider(
+  setSelection: React.Dispatch<React.SetStateAction<SelectionContext>>
+): [onSetSelectedLocation: (selectedLocation: string[]) => void] {
+  const onSetSelectedProvider = React.useCallback(
+    (selectedProvider: string[]) =>
+      setSelection((state) => ({ ...state, selectedProvider })),
+    [setSelection]
+  );
+  return [onSetSelectedProvider];
 }

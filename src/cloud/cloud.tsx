@@ -6,8 +6,14 @@ import { useStyleContext } from "../style_context/use_style_context";
 interface CloudProps extends Cloud {}
 
 export function CloudComponent(props: CloudProps): JSX.Element {
-  const { cloudName, cloudDescription, geoRegion, geoLatitude, geoLongitude } =
-    props;
+  const {
+    cloudName,
+    cloudDescription,
+    geoRegion,
+    geoLatitude,
+    geoLongitude,
+    distanceInKm,
+  } = props;
   const styleContext = useStyleContext();
   return (
     <div
@@ -46,7 +52,7 @@ export function CloudComponent(props: CloudProps): JSX.Element {
       <div className="description">{cloudDescription}</div>
       <div className="name">({cloudName})</div>
       <div className="region">{geoRegion}</div>
-      <div className="distance">distance</div>
+      <div className="distance">{distanceInKm}</div>
       <div className="coordinates">
         {geoLongitude} ||| {geoLatitude}
       </div>

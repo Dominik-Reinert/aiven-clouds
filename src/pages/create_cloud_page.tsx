@@ -24,7 +24,7 @@ export function createCloudPage<P>(
 ): (props: P) => JSX.Element | null {
   const { name, cloudDescriptionFormatter = defaultCloudDescriptionFormatter } =
     config;
-  const result = React.forwardRef((props: P) => {
+  const result = React.forwardRef((props: P, ref) => {
     const clouds: Cloud[] = cloudStore.getCurrentDataAdapted().clouds;
     useAvailableProviderUpdate(clouds);
     useAvailableLocationsUpdate(clouds);
@@ -46,7 +46,7 @@ export function createCloudPage<P>(
           : 0
       );
     // filter by selection
-    return <Component {...props} clouds={clouds} />;
+    return <Component ref={ref} {...props} clouds={clouds} />;
   });
 
   //needed for identification of the component
@@ -55,26 +55,33 @@ export function createCloudPage<P>(
 }
 
 function useAvailableProviderUpdate(clouds: Cloud[]): void {
-  const { availableProvider, setAvailableProvider } = useSelectionContext();
+  const { availableProvider, setAvailableProvider, setSelectedProvider } =
+    useSelectionContext();
   const newProvider = Array.from(
     new Set(clouds.map((cloud) => cloud.cloudName.split("-")[0]))
   );
   if (
-    availableProvider.filter((value) => newProvider.includes(value)).length > 0
+    newProvider.filter((value) => availableProvider.includes(value)).length !==
+    newProvider.length
   ) {
-    setAvailableProvider?.(newProvider);
+    //need to copy the arrays, otherwise some funky stuff is happening when selecting a new location
+    setAvailableProvider?.([...newProvider]);
+    setSelectedProvider?.([...newProvider]);
   }
 }
 
 function useAvailableLocationsUpdate(clouds: Cloud[]): void {
-  const { availableLocations, setAvailableLocation } = useSelectionContext();
+  const { availableLocations, setAvailableLocation, setSelectedLocation } =
+    useSelectionContext();
   const newLocations = Array.from(
     new Set(clouds.map((cloud) => cloud.geoRegion))
   );
   if (
-    availableLocations.filter((value) => newLocations.includes(value)).length >
-    0
+    newLocations.filter((value) => availableLocations.includes(value))
+      .length !== newLocations.length
   ) {
-    setAvailableLocation?.(newLocations);
+    //need to copy the arrays, otherwise some funky stuff is happening when selecting a new location
+    setAvailableLocation?.([...newLocations]);
+    setSelectedLocation?.([...newLocations]);
   }
 }
