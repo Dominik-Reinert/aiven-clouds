@@ -61,6 +61,17 @@ export const navbarStyle = (styleContext: StyleContext) => css`
     }
   }
 
+  .position-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+
+    > * {
+      flex: 1 0 0;
+    }
+  }
+
   @media only screen and (max-width: 1000px) {
     .dev-name {
       display: none;
