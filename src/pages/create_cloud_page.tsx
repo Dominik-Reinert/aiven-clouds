@@ -50,7 +50,6 @@ export function createCloudPage<P>(
           ? cloudA.distanceInKm - cloudB.distanceInKm
           : 0
       );
-    // filter by selection
     return <Component ref={ref} {...props} clouds={clouds} />;
   });
 

@@ -1,7 +1,8 @@
 /**@jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { jsx } from "@emotion/react";
 import { Cloud } from "../store/cloud_store";
 import { useStyleContext } from "../style_context/use_style_context";
+import { cloudStyle } from "./cloud_style";
 
 interface CloudProps extends Cloud {}
 
@@ -16,50 +17,22 @@ export function CloudComponent(props: CloudProps): JSX.Element {
   } = props;
   const styleContext = useStyleContext();
   return (
-    <div
-      css={css`
-        label: cloud-component;
-
-        width: 70%;
-
-        background-color: ${styleContext.colors.cardBackground};
-        border-bottom: 1px solid ${styleContext.colors.aivenBright};
-
-        margin: auto auto 0;
-        padding: 16px;
-
-        display: flex;
-        align-items: center;
-
-        .description {
-          font-size: ${styleContext.sizes.font.text};
-          color: ${styleContext.colors.aivenDark};
-        }
-
-        .name {
-          margin-left: 4px;
-          color: ${styleContext.colors.aivenDark};
-        }
-
-        .name,
-        .region,
-        .distance,
-        .coordinates {
-          font-size: ${styleContext.sizes.font.smallText};
-        }
-
-        > * {
-          flex: 1 0 0;
-        }
-      `}
-    >
+    <div css={cloudStyle(styleContext)}>
       <div className="description">{cloudDescription}</div>
       <div className="name">({cloudName})</div>
       <div className="region">{geoRegion}</div>
-      <div className="distance">{distanceInKm}</div>
+      <div className="distance">{distanceInKm?.toFixed(2).concat(" km")}</div>
       <div className="coordinates">
-        {geoLongitude} ||| {geoLatitude}
+        {prettifyCoordinates(geoLongitude, geoLatitude)}
       </div>
     </div>
   );
+}
+
+function prettifyCoordinates(lon: number, lat: number): string {
+  return "( "
+    .concat(lon.toString().padStart(10, " "))
+    .concat(" | ")
+    .concat(lat.toString().padEnd(10, " "))
+    .concat(" )");
 }

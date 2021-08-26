@@ -12,6 +12,11 @@ interface LanguageResource {
   homeInstruction: string;
   regionDropdownLabel: string;
   providerDropdownLabel: string;
+  tableHeaderName: string;
+  tableHeaderId: string;
+  tableHeaderRegion: string;
+  tableHeaderDistanceInKm: string;
+  tableHeaderLonLat: string;
 }
 
 interface DefaultNamespaceWrapper {
@@ -28,7 +33,12 @@ const resources: LanguageResources = {
       welcome: "Willkommen bei aiven clouds!",
       homeInstruction: "Bitte warten Sie, während die Daten geladen werden.",
       regionDropdownLabel: "Region(en)",
-      providerDropdownLabel: "Anbieter"
+      providerDropdownLabel: "Anbieter",
+      tableHeaderName: "Name",
+      tableHeaderId: "ID",
+      tableHeaderRegion: "Region",
+      tableHeaderDistanceInKm: "Distanz in Km",
+      tableHeaderLonLat: "( lon | lat )",
     },
   },
   en: {
@@ -36,7 +46,12 @@ const resources: LanguageResources = {
       welcome: "Welcome to aiven clouds!",
       homeInstruction: "Please wait while the data is being fetched.",
       regionDropdownLabel: "Region(s)",
-      providerDropdownLabel: "Provider"
+      providerDropdownLabel: "Provider",
+      tableHeaderName: "Name",
+      tableHeaderId: "ID",
+      tableHeaderRegion: "Region",
+      tableHeaderDistanceInKm: "Distance in km",
+      tableHeaderLonLat: "( lon | lat )",
     },
   },
 };
