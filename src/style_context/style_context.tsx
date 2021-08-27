@@ -39,10 +39,10 @@ export const defaultStyles: StyleContext = {
   },
   colors: {
     cardBackground: "#FAFAFA",
-    highlight: "#ff3554", // aiven branding
-    aivenDark: "#ff3554",
-    aivenBright: "#ff7503",
-  },
+    highlight: "#ff3554",   // aiven branding
+    aivenDark: "#ff3554",   //
+    aivenBright: "#ff7503", //
+  },  
   sizes: {
     font: {
       welcome: "60px",
