@@ -115,3 +115,56 @@ const TilesLayoutPageSuspending = createCloudPage<{}>(
   { name: "TilesLayoutPageSuspending" }
 );
 ```
+
+
+## Selection context
+
+*TLDR: The selection context keeps the basic 'page state. The available provider and regions can be found as well as the currently selected values and coordinates of the user*
+
+### available provider and regions
+
+These values are set in the createCloudPage HOC as soon as the data is finished loading. Those are simple `string []`.
+
+### selected provider an region
+
+As soon as new data is fetched, those contain the same values as the available provider and regions, aka *everything is selected*.
+
+Upon selecting more specific values in the dropdowns on the top of 
+
+### selection logic for provider and region
+
+Following assumptions were done:
+
+- Upon fetching the data, everything is supposed to be shown
+- It does not make sense to unselect all entries, showing no data - thus it is not possible
+- Having multiple selections already, clicking an already selected item focuses it and unselects all other elements
+
+This is of course easily changeable, if needed.
+
+## Data
+
+*TLDR: Data coming from a server or api is supposed to be stored in a proper `Store` and ideally be fetched using the `ServerData<D>`. Extending the  `Serverdata<D>` allows for react suspensions and eases the fetching process, if needed*
+
+### (Abstract) Store
+
+The abstract store is supposed to hold information fetched from apis or servers and provide it to the application. 
+
+In this very simple store implementation, it simply holds whatever data you throw into it and expects it to be adapted to fit the specific need the user has with implementing it.
+
+#### Why that?
+
+By enforcing an adaptation of the data that is likely coming from a remote, We ensure that whatever component/class/interface/hobbit is using the data, does not directly depend on the datastructure returned by the remote, ensuring reusability and less dependence in the future.
+
+### ServerData<D>
+
+The server data is a simple Wrapper class that makes it easy to call a server or api for data. It provides a simple `get()` method which will
+
+- throw the promise with the state of the current fetch in progress, if still running
+- throw an error, if fetching the data was unsuccessfull
+- return the data from the server, if successfull
+
+Throwing the currently running fetch promise allows suspending react components while the data is not there yet.
+
+#### Note to the reviewer
+
+As there is no refresh logice whatsoever happening, I intentionally left that code out here for better readability. Simply adding a refresh function to the server data that removes the current `response` and calls the internal `wrapFetch` to refetch it.
