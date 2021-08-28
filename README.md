@@ -174,3 +174,11 @@ As there is no refresh logice whatsoever happening, I intentionally left that co
 ### About the tests
 
 I am not used to working with Jest. At work, we are using a custom made testing framework. That being said, I am on the verge of learning Jest, but I am not too familiar with it, yet, so please be gentle :)
+
+### Next steps
+
+Next steps, that I would take include more extensive unit and integration testing. Other than that, probably add a sorting functionality by clicking the table headers.
+
+Feature wise, implementing a tile view of the list, adding a map with a marker of the location of the respsective list entry would be really nice, I guess.
+
+Other than that, I did not have a specific look into the mobile compatitility and compatibilty with e.g. safari (lacking access to a device) and deprecated browsers (e.g. old Edge, IE, etc.).
