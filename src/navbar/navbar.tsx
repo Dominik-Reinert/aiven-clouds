@@ -16,8 +16,8 @@ export function Navbar(): JSX.Element {
         <span className="page-name">clouds</span>
       </div>
       <div className="position-input-wrapper">
-          <RegionInput />
-          <ProviderInput />
+        <RegionInput />
+        <ProviderInput />
         <PositionInput />
       </div>
     </div>
