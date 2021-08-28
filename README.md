@@ -169,9 +169,8 @@ Throwing the currently running fetch promise allows suspending react components 
 
 As there is no refresh logice whatsoever happening, I intentionally left that code out here for better readability. Simply adding a refresh function to the server data that removes the current `response` and calls the internal `wrapFetch` to refetch it.
 
-
 ## Some notes to the reviewer
 
 ### About the tests
 
-I am not used to working with Jest. At work, we are using [Enzyme](https://enzymejs.github.io/enzyme/), but it did not age well - testing hooks with it is almost impossible. That being said, I am on the verge of learning Jest, but I am not too familiar with it, yet, so please be gentle :) 
+I am not used to working with Jest. At work, we are using a custom made testing framework. That being said, I am on the verge of learning Jest, but I am not too familiar with it, yet, so please be gentle :)

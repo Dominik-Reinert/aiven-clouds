@@ -1,7 +1,8 @@
 /**@jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { jsx } from "@emotion/react";
 import * as React from "react";
 import { useStyleContext } from "../style_context/use_style_context";
+import { dropdownComponentStyle } from "./dropdown_component_style";
 
 interface DropdownItem {
   id: string;
@@ -9,7 +10,7 @@ interface DropdownItem {
   selected: boolean;
   onClick: (id: string) => void;
 }
-interface DropdownComponentProps {
+export interface DropdownComponentProps {
   label: string;
   items: Omit<DropdownItem, "onClick">[];
   onSelect: (id: string) => void;
@@ -39,54 +40,7 @@ export function DropdownComponent(props: DropdownComponentProps): JSX.Element {
   }
 
   return (
-    <div
-      css={css`
-        label: dropdown-component;
-
-        .header {
-          cursor: pointer;
-
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-
-          color: ${styleContext.shades.text};
-          font-size: ${styleContext.sizes.font.text};
-
-          .label {
-            margin: 8px 8px 8px ${numberOfSelectedItems > 0 ? "2px" : "4px"};
-          }
-        }
-
-        .items {
-          position: absolute;
-          display: flex;
-          flex-direction: column;
-          background-color: ${styleContext.shades.text};
-          box-shadow: 5px 5px 11px -2px ${styleContext.shades.boxShadow};
-
-          border-radius: 4px;
-          border-top-left-radius: 0;
-          overflow: hidden;
-        }
-
-        .item {
-          cursor: pointer;
-          padding: 4px 12px;
-          font-size: ${styleContext.sizes.font.text};
-
-          &.selected {
-            color: ${styleContext.shades.text};
-            background-color: ${styleContext.colors.aivenBright};
-          }
-
-          &:hover {
-            color: ${styleContext.shades.text};
-            background-color: ${styleContext.colors.aivenDark};
-          }
-        }
-      `}
-    >
+    <div css={dropdownComponentStyle(styleContext, numberOfSelectedItems)}>
       <div className="header" onClick={onToggleOpen}>
         {numberOfSelectedItems > 0 && (
           <div className="number-selected">{numberOfSelectedItems}</div>
