@@ -21,12 +21,15 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
+    "@types/enzyme": "^3.10.9",
     "@types/jest": "^26.0.15",
+    "@types/power-assert": "^1.5.4",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-i18next": "^8.1.0",
-    "@types/power-assert": "^1.5.4",
     "@types/react-router-dom": "^5.1.8",
+    "enzyme": "^3.11.0",
     "power-assert": "^1.6.1"
   },
   "scripts": {
