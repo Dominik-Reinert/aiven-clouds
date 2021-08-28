@@ -38,8 +38,4 @@ export class ServerData<ServerResponse extends {}> {
     }
     return this.response ?? ({} as ServerResponse);
   }
-
-  public async refresh(force: boolean = false): Promise<void> {
-    await this.wrapFetch(force);
-  }
 }

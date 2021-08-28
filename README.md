@@ -12,6 +12,7 @@ The application was created using the [create react app](https://reactjs.org/doc
 - [Emotion](https://github.com/emotion-js) for styling and CSS
 - [Fontawesome](https://fontawesome.com/) for icons
 - [Jest](https://jestjs.io/) for testing
+- [Power assert](https://github.com/power-assert-js/power-assert) for assertions in tests
 
 ## Getting things started
 
@@ -116,10 +117,9 @@ const TilesLayoutPageSuspending = createCloudPage<{}>(
 );
 ```
 
-
 ## Selection context
 
-*TLDR: The selection context keeps the basic 'page state. The available provider and regions can be found as well as the currently selected values and coordinates of the user*
+_TLDR: The selection context keeps the basic 'page state. The available provider and regions can be found as well as the currently selected values and coordinates of the user_
 
 ### available provider and regions
 
@@ -127,9 +127,9 @@ These values are set in the createCloudPage HOC as soon as the data is finished 
 
 ### selected provider an region
 
-As soon as new data is fetched, those contain the same values as the available provider and regions, aka *everything is selected*.
+As soon as new data is fetched, those contain the same values as the available provider and regions, aka _everything is selected_.
 
-Upon selecting more specific values in the dropdowns on the top of 
+Upon selecting more specific values in the dropdowns on the top of
 
 ### selection logic for provider and region
 
@@ -143,11 +143,11 @@ This is of course easily changeable, if needed.
 
 ## Data
 
-*TLDR: Data coming from a server or api is supposed to be stored in a proper `Store` and ideally be fetched using the `ServerData<D>`. Extending the  `Serverdata<D>` allows for react suspensions and eases the fetching process, if needed*
+_TLDR: Data coming from a server or api is supposed to be stored in a proper `Store` and ideally be fetched using the `ServerData<D>`. Extending the `Serverdata<D>` allows for react suspensions and eases the fetching process, if needed_
 
 ### (Abstract) Store
 
-The abstract store is supposed to hold information fetched from apis or servers and provide it to the application. 
+The abstract store is supposed to hold information fetched from apis or servers and provide it to the application.
 
 In this very simple store implementation, it simply holds whatever data you throw into it and expects it to be adapted to fit the specific need the user has with implementing it.
 
@@ -168,3 +168,10 @@ Throwing the currently running fetch promise allows suspending react components 
 #### Note to the reviewer
 
 As there is no refresh logice whatsoever happening, I intentionally left that code out here for better readability. Simply adding a refresh function to the server data that removes the current `response` and calls the internal `wrapFetch` to refetch it.
+
+
+## Some notes to the reviewer
+
+### About the tests
+
+I am not used to working with Jest. At work, we are using [Enzyme](https://enzymejs.github.io/enzyme/), but it did not age well - testing hooks with it is almost impossible. That being said, I am on the verge of learning Jest, but I am not too familiar with it, yet, so please be gentle :) 
