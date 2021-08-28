@@ -1,11 +1,11 @@
 /**@jsx jsx */
-import { css, jsx } from "@emotion/react";
+import { jsx } from "@emotion/react";
 import React from "react";
 import { CloudComponent } from "../cloud/cloud";
 import { useLanguageTranslation } from "../i18n";
 import { useStyleContext } from "../style_context/use_style_context";
 import { createCloudPage } from "./create_cloud_page";
-import { homePageStyle } from "./home_page_style";
+import { homePageStyle, homePageSuspendingStyle } from "./home_page_style";
 
 export function HomePage(): JSX.Element {
   return (
@@ -31,38 +31,7 @@ const HomePageSuspending = createCloudPage<{}>(
     const styleContext = useStyleContext();
     const [t] = useLanguageTranslation();
     return (
-      <div
-        css={css`
-          label: home-page;
-          height: 80%;
-
-          .header {
-            display: flex;
-            width: 70%;
-            margin: auto;
-            align-content: center;
-            justify-content: space-around;
-            padding: 16px;
-            text-align: left;
-
-            > * {
-              flex: 1 0 0;
-              color: ${styleContext.shades.text};
-              font-size: ${styleContext.sizes.font.text};
-              text-align: center;
-            }
-
-            .name {
-              text-align: left;
-            }
-          }
-
-          .scrollable-content {
-            overflow-y: auto;
-            height: calc(100% - 60px);
-          }
-        `}
-      >
+      <div css={homePageSuspendingStyle(styleContext)}>
         <div className="header">
           <div className="name">{t("tableHeaderName")}</div>
           <div className="id">{t("tableHeaderId")}</div>

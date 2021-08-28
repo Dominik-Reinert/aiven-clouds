@@ -7,6 +7,12 @@ enum SupportedLanguages {
   "de" = "de",
 }
 
+export interface PositionValidationParam {
+  min: number;
+  max: number;
+  lonOrLat: "Longitude" | "Latitude";
+}
+
 interface LanguageResource {
   welcome: string;
   homeInstruction: string;
@@ -17,6 +23,8 @@ interface LanguageResource {
   tableHeaderRegion: string;
   tableHeaderDistanceInKm: string;
   tableHeaderLonLat: string;
+  positionValidationNotANumber: string;
+  positionValidationWrongValue: string; //(param: PositionValidationParam) => string
 }
 
 interface DefaultNamespaceWrapper {
@@ -39,6 +47,9 @@ const resources: LanguageResources = {
       tableHeaderRegion: "Region",
       tableHeaderDistanceInKm: "Distanz in Km",
       tableHeaderLonLat: "( lon | lat )",
+      positionValidationNotANumber: "{{lonOrLat}} muss eine Zahl sein!",
+      positionValidationWrongValue:
+        "{{lonOrLat}} muss zwischen {{min}} und {{max}} liegen!",
     },
   },
   en: {
@@ -52,6 +63,9 @@ const resources: LanguageResources = {
       tableHeaderRegion: "Region",
       tableHeaderDistanceInKm: "Distance in km",
       tableHeaderLonLat: "( lon | lat )",
+      positionValidationNotANumber: "{{lonOrLat}} must be a number!",
+      positionValidationWrongValue:
+        "{{lonOrLat}} must be between {{min}} and {{max}}!",
     },
   },
 };
@@ -65,7 +79,7 @@ i18n
   });
 
 export function useLanguageTranslation(): [
-  t: (key: keyof LanguageResource) => string,
+  t: (key: keyof LanguageResource, param?: any) => string,
   i18n: typeof i18n,
   ready: boolean
 ] {
