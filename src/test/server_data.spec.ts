@@ -16,5 +16,5 @@ test("returns data after fetch", async () => {
   const fetchCallback = jest.fn(() => fetchPromiseToReturn);
   const data = new ServerData({ fetch: fetchCallback });
   await fetchPromiseToReturn;
-  assert.equal(data.get(), testData);
+  assert.deepStrictEqual(data.get(), testData);
 });
